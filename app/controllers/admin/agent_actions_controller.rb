@@ -1,4 +1,5 @@
 class Admin::AgentActionsController < ApplicationController
+  before_action :authorize_admin!
 
   def new
   end
@@ -21,12 +22,12 @@ class Admin::AgentActionsController < ApplicationController
     if params[:performed] || params[:ignored]
       if params[:performed]
         ActionService.update_aa_performed(@aa)
-        ActionService.action_performed("marked as performed", request)
+        ActionService.action_performed(current_admin, "marked as performed", request, params)
         flash[:success] = 'Agent Action Updated!'
         redirect_to :back
       else
         ActionService.update_aa_ignored(@aa)
-        ActionService.action_performed("marked as ignored", request)
+        ActionService.action_performed(current_admin, "marked as ignored", request, params)
         flash[:success] = 'Agent Action Updated!'
         redirect_to :back
       end

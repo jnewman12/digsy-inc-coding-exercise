@@ -7,14 +7,14 @@ class ActionService
   end
 
   # for performing and viewing actions
-  def self.action_performed(note, request)
+  def self.action_performed(user, note, request, params)
     log = UserLog.new
-    log.user = current_user
+    log.user_id = user.id
     log.note = note
     log.browser = request.env['HTTP_USER_AGENT']
     log.ip_address = request.env['REMOTE_ADDR']
-    log.controller = controller_name
-    log.action = action_name
+    #log.controller = controller_name
+    #log.action = action_name
     log.params = params.inspect
     log.save
   end

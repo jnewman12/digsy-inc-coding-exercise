@@ -14,3 +14,14 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+$('#loadThis').on('click', function() {
+	$.ajax({
+	  url: "/agent_actions/index",
+	  cache: false,
+	  success: function(html){
+	    $("#view_action").append(html);
+	  }
+	});
+})

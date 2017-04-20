@@ -1,0 +1,7 @@
+
+<% if logged_in? %>
+	<button class="center" id="loadThis">View Agent Action</button>
+	<div id="view_action"></div>
+<% else %>
+	<%= link_to 'Log In to Begin', login_path, style: "padding-top: 100px; text-align: center;" %>
+<% end %>
